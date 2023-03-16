@@ -1,3 +1,4 @@
+package org.DSLab2;
 public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     private RBNode<T> root = null;
     private int size = 0;
@@ -50,8 +51,8 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
         }
 
         if(!parentNode.isColor())return;// if the parent is black
-        // while solving if the grand is the root
-        // if parent red , uncle is red -> parent and uncle back grand red and solve grand
+            // while solving if the grand is the root
+            // if parent red , uncle is red -> parent and uncle back grand red and solve grand
         else if(parentNode.isColor()&& (uncle != null &&uncle.isColor())){
             uncle.setColor(false);
             parentNode.setColor(false);
@@ -129,9 +130,8 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
         return find(key, root);
     }
     private RBNode<T> find(T key, RBNode<T> node){
+        if(node == null)return null;
         if(node.getValue().compareTo(key)==0)return node;
-        // TODO check this case
-        else if(node == null)return null;
         else if(node.getValue().compareTo(key)>0)return find(key, node.getLeftChild());
         else return find(key, node.getRightChild());
     }
