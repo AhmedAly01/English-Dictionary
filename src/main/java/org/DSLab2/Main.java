@@ -1,11 +1,12 @@
-package org.DSLab2;
+import java.util.Scanner;
 
-public class Main {
-
-    public static String helloWorld() {
-        return "Hello World!";
-    }
+public class main {
     public static void main(String[] args) {
-        System.out.println(helloWorld());
+        Scanner scn = new Scanner(System.in);
+        RBTree<Integer> rbTree = new RBTree<>();
+        int n = scn.nextInt();
+        for(int i=0;i<n;i++){
+            rbTree.insert(scn.nextInt());
+        }
     }
 }
