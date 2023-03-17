@@ -1,8 +1,11 @@
-name: Red Black tree test cases
+name: testCases
+
 on: [push]
+
 jobs:
-  build :
-    runs-on: windows-latest
+  build:
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -10,5 +13,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          - name: Maven install and run tests
-            run: mvn install
+      - name: Build with Maven
+        run: mvn install
