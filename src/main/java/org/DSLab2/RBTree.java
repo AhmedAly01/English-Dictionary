@@ -1,4 +1,8 @@
 package org.DSLab2;
+
+import lombok.Getter;
+
+@Getter
 public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     private RBNode<T> root = null;
     private int size = 0;
@@ -8,6 +12,7 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
         if(root == null ){
             RBNode<T> newNode = new RBNode<T>(key, null, false);
             root = newNode;
+            size++;
             return newNode;
         }
         RBNode<T> newNode = insert(key, root);
@@ -18,6 +23,7 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
         if(node.getValue().compareTo(key) == 0) return null;
         else if(node.getValue().compareTo(key) > 0){
             if(node.getLeftChild() == null){
+                size++;
                 RBNode<T> newNode = new RBNode<>(key, node, true);
                 node.setLeftChild(newNode);
                 newNode.setParent(node);
@@ -27,6 +33,7 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
         }
         else{
             if(node.getRightChild() == null){
+                size++;
                 RBNode<T> newNode = new RBNode<>(key, node, true);
                 node.setRightChild(newNode);
                 newNode.setParent(node);
