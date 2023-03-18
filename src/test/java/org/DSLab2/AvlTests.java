@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class AvlTests {
-    private AVL_Tree avl;
+    private AVLTree avl;
 
     void setUp() {
-        avl = new AVL_Tree();
+        avl = new AVLTree();
     }
 
     @Test
@@ -39,16 +39,16 @@ class AvlTests {
     @Test
     void TestSearch() {
         setUp();
-        avl.insert(1);
-        avl.insert(3);
-        Assertions.assertTrue(avl.searchNode(1));
-        Assertions.assertTrue(avl.searchNode(3));
-        Assertions.assertFalse(avl.searchNode(2));
-        Assertions.assertFalse(avl.searchNode(4));
-        Assertions.assertFalse(avl.searchNode(0));
-        avl.delete(1);
-        Assertions.assertFalse(avl.searchNode(1));
-        Assertions.assertTrue(avl.searchNode(3));
+        avl.insert("1");
+        avl.insert("3");
+        Assertions.assertTrue(avl.search("1"));
+        Assertions.assertTrue(avl.search("3"));
+        Assertions.assertFalse(avl.search("2"));
+        Assertions.assertFalse(avl.search("4"));
+        Assertions.assertFalse(avl.search("0"));
+        avl.delete("1");
+        Assertions.assertFalse(avl.search("1"));
+        Assertions.assertTrue(avl.search("3"));
     }
 
     @Test
