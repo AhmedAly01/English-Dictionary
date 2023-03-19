@@ -1,28 +1,17 @@
 package org.DSLab2;
 
-interface IBSTree {
+interface IBSTree<T extends Comparable <? super T>> {
     public int size();
 
     public boolean isEmpty();
 
-    public boolean search(String data);
+    public boolean search(T data);
 
-    public boolean insert(String data);
+    public boolean insert(T data);
 
-    public boolean delete(String data);
+    public boolean delete(T data);
 
     public int height();
 
-
-//    public int FindMin();
-//
-//    public int FindMax();
-
-
-//    public void inorder();
-//
-//    public void preorder();
-//
-//    public void postorder();
 
 }

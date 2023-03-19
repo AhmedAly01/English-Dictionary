@@ -1,12 +1,12 @@
 package org.DSLab2;
 
-class Node {
-    String data;
-    Node left;
-    Node right;
+class Node<T> {
+    T data;
+    Node<T> left;
+    Node<T> right;
     int height;
 
-    Node(String data) {
+    Node(T data) {
         this.data = data;
         this.left = null;
         this.right = null;
