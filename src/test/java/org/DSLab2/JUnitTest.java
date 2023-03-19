@@ -31,6 +31,78 @@ public class JUnitTest {
         res.get(1).add(color);
     }
     // testing insertion
+
+    @Test
+    public void insertTheBlackRoot() { // check the root always is black
+        int[] nums = {1};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(1),Arrays.asList(0));
+        Assertions.assertEquals(res, correct);
+    }
+
+    @Test
+    public void insertWithBlackParent() { // add a node to a parent black nothing to do
+        int[] nums = {1,2};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(1,2),Arrays.asList(0, 1));
+        Assertions.assertEquals(res, correct);
+    }
+
+    @Test
+    public void insertWithUncleAndParentRed() {
+        int[] nums = {5,3,6,2};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(5,3,2,6),Arrays.asList(0,0,1,0));
+        Assertions.assertEquals(res, correct);
+    }
+
+    @Test
+    public void insertWithParentRUncleB1() {//ll rotate
+        int[] nums = {5,3,6,2,1};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(5,2,1,3,6),Arrays.asList(0,0,1,1,0));
+        Assertions.assertEquals(res, correct);
+    }
+
+    @Test
+    public void insertWithParentRUncleB2() {// rr rotate
+        int[] nums = {5,3,6,2,1,4};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(5,2,1,3,4,6),Arrays.asList(0,1,0,0,1,0));
+        Assertions.assertEquals(res, correct);
+    }
+
+    @Test
+    public void insertWithParentRUncleB3() {// rl rotate
+        int[] nums = {10,3,13,7,2,1,9,8};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(10,3,2,1,8,7,9,13),Arrays.asList(0,1,0,1,0,1,1,0));
+        Assertions.assertEquals(res, correct);
+    }
     @Test
     public void testInsertion1() {
         int[] nums = {1,2,3,4,5};
