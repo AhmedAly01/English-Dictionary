@@ -270,5 +270,5 @@ public class JUnitTest {
         List<List<Integer>> correct = Arrays.asList(Arrays.asList(6,1,10),Arrays.asList(0,0,0));
         Assertions.assertEquals(correct, res);
     }
-
 }
+

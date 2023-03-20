@@ -3,7 +3,8 @@ package org.DSLab2;
 import lombok.Getter;
 
 @Getter
-public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
+
+public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     private RBNode<T> root = null;
     private int size = 0;
 
@@ -303,6 +304,11 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return !(size == 0);
     }
 
     @Override
