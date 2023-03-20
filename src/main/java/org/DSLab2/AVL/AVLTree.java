@@ -1,9 +1,11 @@
 package org.DSLab2.AVL;
 
 
+import org.DSLab2.Interfaces.IBSTree;
+
 import java.util.Objects;
 
-public class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the AVLTree class which implements the AvlTree interface
+public class AVLTree<T extends Comparable <? super T>> implements IBSTree<T> {// the AVLTree class which implements the AvlTree interface
     AVLNode<T> root;// the root node
     int size = 0;// the size of the tree(number of nodes)
 
@@ -146,7 +148,9 @@ public class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the
                 node.data = temp.data;// replace the node data with the minimum node data
                 node.right = delete(node.right, temp.data);// delete the minimum node
             }
-            assert node != null;
+            if(node == null){
+                return node;
+            }
             node.height = Math.max(height(node.left), height(node.right)) + 1;// update the height of the node
             node.balanceFactor = balanceFactor(node);// update the balance factor of the node
             if (node.balanceFactor > 1) {// if the balance factor is greater than 1 then we need to rotate the tree
@@ -208,6 +212,45 @@ public class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the
             // left and right subtree and add 1 to the height of the tree
         }
 
+    }
+
+
+    public T findMin() {// find the minimum value in the tree
+        if (this.root == null) {// if the root is null then return -1
+            return null;
+        }
+        AVLNode<T> node = findMin(this.root);// find the minimum value in the tree
+        return node.data;// return the minimum value
+    }
+
+    protected AVLNode<T> findMin(AVLNode<T> node) {// find the minimum value in the tree
+        if (node.left == null) {// if the left node is null then return the node data
+            return node;
+        }
+        return findMin(node.left);// else search the left node
+    }
+
+    public T FindMax() {// find the maximum value in the tree
+        if(this.root==null) {// if the root is null then return -1
+            return null;
+        }
+        AVLNode<T> max = FindMax(this.root);// find the maximum value in the tree
+        return max.data;// return the maximum value
+    }
+
+    private AVLNode<T> FindMax(AVLNode<T> node) {
+        if (node == null) {// if the node is null then return null
+            return null;
+        }
+        if (node.right == null) {// if the right node is null then return the node which the node has the maximum
+            // value
+            return node;
+        }
+        return FindMax(node.right);// else search the right node as the value gets greater as we go to write
+    }
+
+    public boolean isEmpty() {// check if the tree is empty or not
+        return this.root == null;
     }
 }
 

@@ -85,8 +85,8 @@ class AvlTests {
         avl.delete(10);
         Assertions.assertEquals(11, avl.findMin());
         avl.delete(11);
-        Assertions.assertFalse(avl.isEmpty());
-        Assertions.assertEquals(-1, avl.findMin());
+        Assertions.assertTrue(avl.isEmpty());
+        Assertions.assertEquals(null, avl.findMin());
     }
 
     @Test
@@ -122,8 +122,8 @@ class AvlTests {
         avl.delete(3);
         Assertions.assertEquals(2, avl.FindMax());
         avl.delete(2);
-        Assertions.assertFalse(avl.isEmpty());
-        Assertions.assertEquals(-1, avl.FindMax());
+        Assertions.assertTrue(avl.isEmpty());
+        Assertions.assertEquals(null, avl.FindMax());
     }
 
     @Test
