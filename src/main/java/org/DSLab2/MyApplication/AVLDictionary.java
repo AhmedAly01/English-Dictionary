@@ -1,6 +1,8 @@
 package org.DSLab2.MyApplication;
 
-public class AVLDictionary implements AVLDictionaryIF{
+import org.DSLab2.Interfaces.AVLDictionaryIF;
+
+public class AVLDictionary implements AVLDictionaryIF {
     Node root;//the root node
     int size = 0;//the size of the tree(number of nodes)
 

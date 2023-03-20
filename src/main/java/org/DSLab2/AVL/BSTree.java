@@ -1,4 +1,6 @@
-package org.DSLab2;
+package org.DSLab2.AVL;
+
+import org.DSLab2.Interfaces.IBSTree;
 
 import java.util.Objects;
 
@@ -7,7 +9,7 @@ public class BSTree<T extends Comparable <? super T>> implements IBSTree<T> {
     private int size = 0;// size of the tree
     private boolean exist = false;
 
-    BSTree() {
+    public BSTree() {
         this.root = null;// initialize the root
     }
 
@@ -63,7 +65,7 @@ public class BSTree<T extends Comparable <? super T>> implements IBSTree<T> {
         return false;
     }
 
-    private T findMin() {// find the minimum value in the tree
+    public T findMin() {// find the minimum value in the tree
         if (this.root == null) {// if the root is null then return -1
             return null;
         }
@@ -78,7 +80,7 @@ public class BSTree<T extends Comparable <? super T>> implements IBSTree<T> {
         return findMin(node.left);// else search the left node
     }
 
-    private T FindMax() {// find the maximum value in the tree
+    public T FindMax() {// find the maximum value in the tree
         if(this.root==null) {// if the root is null then return -1
             return null;
         }

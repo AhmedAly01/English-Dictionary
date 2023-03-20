@@ -1,4 +1,6 @@
-package org.DSLab2.MyApplication;
+package org.DSLab2.Interfaces;
+
+import org.DSLab2.MyApplication.Node;
 
 public interface AVLDictionaryIF {
     public int Getsize();

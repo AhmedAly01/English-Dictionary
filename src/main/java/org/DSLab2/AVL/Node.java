@@ -1,4 +1,4 @@
-package org.DSLab2;
+package org.DSLab2.AVL;
 
 class Node<T> {
     T data;

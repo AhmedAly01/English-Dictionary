@@ -1,9 +1,13 @@
 package org.DSLab2;
 
+import org.DSLab2.AVL.AVLTree;
+import org.DSLab2.AVL.BSTree;
+import org.DSLab2.Interfaces.IBSTree;
+
 public class Main {
 
     public static void main(String[] args) {
-        AVLTree<String> tree = new AVLTree<>();
+        IBSTree<String> tree = new AVLTree<>();
         BSTree<String> BST = new BSTree<>();// create a new binary tree
         BST.insert("10");
         BST.insert("5");
@@ -31,7 +35,7 @@ public class Main {
 //        System.out.println(BST.size());
 
         System.out.println();
-        tree.preOrder();
+//        tree.preOrder();
         System.out.println();
         System.out.println(tree.height());
         System.out.println(tree.search("a"));

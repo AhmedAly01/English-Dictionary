@@ -1,4 +1,4 @@
-package org.DSLab2.MyApplication;
+package org.DSLab2.Interfaces;
 
 import java.io.File;
 

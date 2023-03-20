@@ -1,4 +1,4 @@
-package org.DSLab2;
+package org.DSLab2.AVL;
 
 
 import java.util.Objects;
@@ -7,7 +7,7 @@ public class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the
     AVLNode<T> root;// the root node
     int size = 0;// the size of the tree(number of nodes)
 
-    AVLTree() {// the constructor of the tree class
+    public AVLTree() {// the constructor of the tree class
         this.root = null;
     }
 

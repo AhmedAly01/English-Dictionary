@@ -1,5 +1,4 @@
-package org.DSLab2;
-
+package org.DSLab2.AVL;
 class AVLNode<T> extends Node<T>{// the node class which contains the data and the left and right node
     int balanceFactor = 0;
     AVLNode<T> left;

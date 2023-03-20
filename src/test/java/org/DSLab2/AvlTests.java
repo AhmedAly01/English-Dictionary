@@ -1,5 +1,6 @@
 package org.DSLab2;
 
+import org.DSLab2.AVL.AVLTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -128,12 +129,12 @@ class AvlTests {
     @Test
     void testSearchNode() {
         setUp();
-        Assertions.assertFalse(avl.searchNode(5));
+        Assertions.assertFalse(avl.search(5));
         avl.insert(5);
-        Assertions.assertTrue(avl.searchNode(5));
-        Assertions.assertFalse(avl.searchNode(3));
+        Assertions.assertTrue(avl.search(5));
+        Assertions.assertFalse(avl.search(3));
         avl.insert(3);
-        Assertions.assertTrue(avl.searchNode(3));
+        Assertions.assertTrue(avl.search(3));
     }
 
     @Test

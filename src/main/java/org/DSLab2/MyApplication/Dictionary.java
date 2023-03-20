@@ -1,13 +1,12 @@
 package org.DSLab2.MyApplication;
 
-import org.DSLab2.AVL.AVL_Tree;
+import org.DSLab2.Interfaces.DictionaryIF;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Dictionary implements DictionaryIF{
+public class Dictionary implements DictionaryIF {
     AVLDictionary AVL;
     Dictionary(){
         AVL = new AVLDictionary();
