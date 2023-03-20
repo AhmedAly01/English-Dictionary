@@ -9,16 +9,18 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     private int size = 0;
 
     @Override
-    public RBNode<T> insert(T key) {
+    public boolean insert(T key) {
         if(root == null ){
             RBNode<T> newNode = new RBNode<T>(key, null, false);
             root = newNode;
             size++;
-            return newNode;
+            return true;
         }
         RBNode<T> newNode = insert(key, root);
-        if(newNode != null) solveInsertion(newNode);
-        return newNode;
+        if(newNode == null)
+            return false;
+        solveInsertion(newNode);
+        return true;
     }
     private RBNode<T> insert(T key, RBNode<T> node){
         if(node.getValue().compareTo(key) == 0) return null;
@@ -129,11 +131,11 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         node.setParent(grandParent);
     }
     @Override
-    public RBNode<T> delete(T key) {
-        if(root == null)return null;
-        RBNode<T> deletedNode = delete(search(key));
+    public boolean delete(T key) {
+        if(root == null) return false;
+        RBNode<T> deletedNode = delete(find(key, root));
 //        solveDeletion(deletedNode);
-        return deletedNode;
+        return deletedNode != null;
     }
 
     private void solveDeletion(RBNode<T> deletedNode){
@@ -291,8 +293,8 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     }
 
     @Override
-    public RBNode<T> search(T key) {
-        return find(key, root);
+    public boolean search(T key) {
+        return find(key, root) != null;
     }
     private RBNode<T> find(T key, RBNode<T> node){
         if(node == null)return null;
