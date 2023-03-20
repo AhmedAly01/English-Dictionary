@@ -130,7 +130,7 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     @Override
     public RBNode<T> delete(T key) {
         if(root == null)return null;
-        RBNode<T> deletedNode = delete(find(key));
+        RBNode<T> deletedNode = delete(search(key));
 //        solveDeletion(deletedNode);
         return deletedNode;
     }
@@ -290,7 +290,7 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     }
 
     @Override
-    public RBNode<T> find(T key) {
+    public RBNode<T> search(T key) {
         return find(key, root);
     }
     private RBNode<T> find(T key, RBNode<T> node){
