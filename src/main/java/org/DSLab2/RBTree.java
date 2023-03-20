@@ -178,27 +178,30 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         }
         else if(!sibling.isColor()&&(sibling.getRightChild()!=null&&sibling.getRightChild().isColor())
                 ||(sibling.getLeftChild()!=null&&sibling.getLeftChild().isColor())){
-            if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getRightChild().isColor()){
+            if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getRightChild()!=null && sibling.getRightChild().isColor()){
                 //rr
                 leftSwap(sibling);
                 sibling.getRightChild().setColor(false);
             }
-            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getLeftChild().isColor()){
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getLeftChild()!=null && sibling.getLeftChild().isColor()){
                 //ll
                 rightSwap(sibling);
                 sibling.getLeftChild().setColor(false);
             }
-            else if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getLeftChild().isColor()){
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getLeftChild()!=null && sibling.getLeftChild().isColor()){
                 //rl
                 sibling.getLeftChild().setColor(false);
                 rightSwap(sibling.getLeftChild());
-                leftSwap(dbNode.getRightChild());
+                // todo not sure
+//                leftSwap(dbNode.getRightChild());
+                leftSwap(dbNode.getParent().getRightChild());
             }
-            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getRightChild().isColor()){
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getRightChild()!=null && sibling.getRightChild().isColor()){
                 //lr
                 sibling.getRightChild().setColor(false);
                 leftSwap(sibling.getRightChild());
-                rightSwap(dbNode.getLeftChild());
+//                rightSwap(dbNode.getLeftChild());
+                rightSwap(dbNode.getParent().getLeftChild());
             }
         }
         else if(sibling.isColor()){
@@ -220,9 +223,9 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
 
     }
 
-    private RBNode<T> delete(RBNode<T> node){
-        if(node == null)return null;
-        if(node.getRightChild() == null && node.getLeftChild() == null){
+    private RBNode<T> delete(RBNode<T> node) {
+        if (node == null) return null;
+        if (node.getRightChild() == null && node.getLeftChild() == null) {
             size--;
             solveDeletion(node);
 //            if(node.getParent() == null) {
@@ -230,48 +233,43 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
 //                node.getRightChild().setParent(null);
 //            }
             // check this case if you are deleting the root and the code enter to this section
-            if(node.getParent().getValue().compareTo(node.getValue())>0) node.getParent().setLeftChild(null);
+            if (node.getParent().getValue().compareTo(node.getValue()) > 0) node.getParent().setLeftChild(null);
             else node.getParent().setRightChild(null);
-        }
-        else if(node.getRightChild()!=null && node.getLeftChild() == null){
+        } else if (node.getRightChild() != null && node.getLeftChild() == null) {
             size--;
             solveDeletion(node);
-            if(node.getParent() == null) {
+            if (node.getParent() == null) {
                 root = node.getRightChild();
                 node.getRightChild().setParent(null);
-            }
-            else if(node.getParent().getValue().compareTo(node.getValue())>0) {
+            } else if (node.getParent().getValue().compareTo(node.getValue()) > 0) {
                 node.getParent().setLeftChild(node.getRightChild());
                 node.getRightChild().setParent(node.getParent());
-            }
-            else {
+            } else {
                 node.getParent().setRightChild(node.getRightChild());
                 node.getRightChild().setParent(node.getParent());
             }
-        }
-        else if(node.getRightChild()==null && node.getLeftChild() != null){
+        } else if (node.getRightChild() == null && node.getLeftChild() != null) {
             size--;
             solveDeletion(node);
-            if(node.getParent() == null) {
+            if (node.getParent() == null) {
                 root = node.getLeftChild();
                 node.getLeftChild().setParent(null);
             }
-            if(node.getParent().getValue().compareTo(node.getValue())>0) {
+            if (node.getParent().getValue().compareTo(node.getValue()) > 0) {
                 node.getParent().setLeftChild(node.getLeftChild());
                 node.getLeftChild().setParent(node.getParent());
-            }
-            else {
+            } else {
                 node.getParent().setRightChild(node.getLeftChild());
                 node.getLeftChild().setParent(node.getParent());
             }
-        }
-        else{
+        } else {
             RBNode<T> successorNode = successor(node);
             T successorVal = successorNode.getValue();
             delete(successorNode);
             node.setValue(successorVal);
         }
-            return node;
+//        size--;
+        return node;
     }
 
     private RBNode<T> getSibling(RBNode<T>node){
