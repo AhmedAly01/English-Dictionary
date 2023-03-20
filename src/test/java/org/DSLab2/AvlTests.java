@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class AvlTests {
-    private AVL_Tree avl;
+    private AVLTree avl;
 
     void setUp() {
-        avl = new AVL_Tree();
+        avl = new AVLTree();
     }
 
     @Test
@@ -39,16 +39,16 @@ class AvlTests {
     @Test
     void TestSearch() {
         setUp();
-        avl.insert(1);
-        avl.insert(3);
-        Assertions.assertTrue(avl.searchNode(1));
-        Assertions.assertTrue(avl.searchNode(3));
-        Assertions.assertFalse(avl.searchNode(2));
-        Assertions.assertFalse(avl.searchNode(4));
-        Assertions.assertFalse(avl.searchNode(0));
-        avl.delete(1);
-        Assertions.assertFalse(avl.searchNode(1));
-        Assertions.assertTrue(avl.searchNode(3));
+        avl.insert("1");
+        avl.insert("3");
+        Assertions.assertTrue(avl.search("1"));
+        Assertions.assertTrue(avl.search("3"));
+        Assertions.assertFalse(avl.search("2"));
+        Assertions.assertFalse(avl.search("4"));
+        Assertions.assertFalse(avl.search("0"));
+        avl.delete("1");
+        Assertions.assertFalse(avl.search("1"));
+        Assertions.assertTrue(avl.search("3"));
     }
 
     @Test
@@ -64,28 +64,28 @@ class AvlTests {
         avl.insert(6);
         avl.insert(4);
         avl.insert(2);
-        Assertions.assertEquals(2, avl.FindMin());
+        Assertions.assertEquals(2, avl.findMin());
         avl.delete(2);
-        Assertions.assertEquals(3, avl.FindMin());
+        Assertions.assertEquals(3, avl.findMin());
         avl.delete(3);
-        Assertions.assertEquals(4, avl.FindMin());
+        Assertions.assertEquals(4, avl.findMin());
         avl.delete(4);
-        Assertions.assertEquals(5, avl.FindMin());
+        Assertions.assertEquals(5, avl.findMin());
         avl.delete(5);
-        Assertions.assertEquals(6, avl.FindMin());
+        Assertions.assertEquals(6, avl.findMin());
         avl.delete(6);
-        Assertions.assertEquals(7, avl.FindMin());
+        Assertions.assertEquals(7, avl.findMin());
         avl.delete(7);
-        Assertions.assertEquals(8, avl.FindMin());
+        Assertions.assertEquals(8, avl.findMin());
         avl.delete(8);
-        Assertions.assertEquals(9, avl.FindMin());
+        Assertions.assertEquals(9, avl.findMin());
         avl.delete(9);
-        Assertions.assertEquals(10, avl.FindMin());
+        Assertions.assertEquals(10, avl.findMin());
         avl.delete(10);
-        Assertions.assertEquals(11, avl.FindMin());
+        Assertions.assertEquals(11, avl.findMin());
         avl.delete(11);
         Assertions.assertFalse(avl.isEmpty());
-        Assertions.assertEquals(-1, avl.FindMin());
+        Assertions.assertEquals(-1, avl.findMin());
     }
 
     @Test
