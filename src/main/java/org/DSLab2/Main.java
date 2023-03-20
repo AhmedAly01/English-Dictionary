@@ -9,12 +9,15 @@ public class Main {
         for(int i=0;i<n;i++){
             rbTree.insert(scn.nextInt());
         }
+//        for(int i=0;i<n;i++){
+//            if (rbTree.find(scn.nextInt()) != null) {
+//                System.out.println("YES");
+//            } else {
+//                System.out.println("NO");
+//            }
+//        }
         for(int i=0;i<n;i++){
-            if (rbTree.find(scn.nextInt()) != null) {
-                System.out.println("YES");
-            } else {
-                System.out.println("NO");
-            }
+            rbTree.delete(scn.nextInt());
         }
     }
 }

@@ -129,7 +129,148 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     }
     @Override
     public RBNode<T> delete(T key) {
-        return null;
+        if(root == null)return null;
+        RBNode<T> deletedNode = delete(find(key));
+//        solveDeletion(deletedNode);
+        return deletedNode;
+    }
+
+    private void solveDeletion(RBNode<T> deletedNode){
+        if(deletedNode.isColor()||
+                (deletedNode.getRightChild()!=null &&deletedNode.getRightChild().isColor())||
+                (deletedNode.getLeftChild()!=null &&deletedNode.getLeftChild().isColor())){
+            if(!deletedNode.isColor()){
+                if(deletedNode.getLeftChild()!=null)
+                    deletedNode.getLeftChild().setColor(false);
+                if(deletedNode.getRightChild()!=null)
+                    deletedNode.getRightChild().setColor(false);
+            }
+            else if(deletedNode.getRightChild()!=null &&deletedNode.getRightChild().isColor())
+                deletedNode.getRightChild().setColor(false);
+            else if(deletedNode.getLeftChild()!=null &&deletedNode.getLeftChild().isColor())
+                deletedNode.getLeftChild().setColor(false);
+        }
+        else{
+            solveDoubleBlack(deletedNode);
+        }
+    }
+    private void solveDoubleBlack(RBNode<T> dbNode) {
+        if(dbNode.getParent()==null)return;
+        if(dbNode.isColor()) {
+            dbNode.setColor(false);
+            return;
+        }
+
+        RBNode<T>sibling = getSibling(dbNode);
+        if(sibling == null ||(!sibling.isColor()&&(sibling.getRightChild()==null||!sibling.getRightChild().isColor())
+                &&(sibling.getLeftChild()==null||!sibling.getLeftChild().isColor()))){
+            if(sibling!=null)
+                sibling.setColor(true);
+            solveDoubleBlack(dbNode.getParent());
+        }
+        else if(!sibling.isColor()&&(sibling.getRightChild()!=null&&sibling.getRightChild().isColor())
+                ||(sibling.getLeftChild()!=null&&sibling.getLeftChild().isColor())){
+            if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getRightChild().isColor()){
+                //rr
+                leftSwap(sibling);
+                sibling.getRightChild().setColor(false);
+            }
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getLeftChild().isColor()){
+                //ll
+                rightSwap(sibling);
+                sibling.getLeftChild().setColor(false);
+            }
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getLeftChild().isColor()){
+                //rl
+                sibling.getLeftChild().setColor(false);
+                rightSwap(sibling.getLeftChild());
+                leftSwap(dbNode.getRightChild());
+            }
+            else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getRightChild().isColor()){
+                //lr
+                sibling.getRightChild().setColor(false);
+                leftSwap(sibling.getRightChild());
+                rightSwap(dbNode.getLeftChild());
+            }
+        }
+        else if(sibling.isColor()){
+
+        }
+
+    }
+
+    private RBNode<T> delete(RBNode<T> node){
+        if(node.getRightChild() == null && node.getLeftChild() == null){
+            solveDeletion(node);
+//            if(node.getParent() == null) {
+//                root = node.getRightChild();
+//                node.getRightChild().setParent(null);
+//            }
+            // check this case if you are deleting the root and the code enter to this section
+            if(node.getParent().getValue().compareTo(node.getValue())>0) node.getParent().setLeftChild(null);
+            else node.getParent().setRightChild(null);
+        }
+        else if(node.getRightChild()!=null && node.getLeftChild() == null){
+            solveDeletion(node);
+            if(node.getParent() == null) {
+                root = node.getRightChild();
+                node.getRightChild().setParent(null);
+            }
+            else if(node.getParent().getValue().compareTo(node.getValue())>0) {
+                node.getParent().setLeftChild(node.getRightChild());
+                node.getRightChild().setParent(node.getParent());
+            }
+            else {
+                node.getParent().setRightChild(node.getRightChild());
+                node.getRightChild().setParent(node.getParent());
+            }
+        }
+        else if(node.getRightChild()==null && node.getLeftChild() != null){
+            solveDeletion(node);
+            if(node.getParent() == null) {
+                root = node.getLeftChild();
+                node.getLeftChild().setParent(null);
+            }
+            if(node.getParent().getValue().compareTo(node.getValue())>0) {
+                node.getParent().setLeftChild(node.getLeftChild());
+                node.getLeftChild().setParent(node.getParent());
+            }
+            else {
+                node.getParent().setRightChild(node.getLeftChild());
+                node.getLeftChild().setParent(node.getParent());
+            }
+        }
+        else{
+            RBNode<T> successorNode = successor(node);
+            T successorVal = successorNode.getValue();
+            delete(successorNode);
+            node.setValue(successorVal);
+        }
+            return node;
+    }
+
+    private RBNode<T> getSibling(RBNode<T>node){
+        if(node.getParent()==null)return null;
+        if(node.getValue().compareTo(node.getParent().getValue())>0)return node.getParent().getLeftChild();
+        else return node.getParent().getRightChild();
+    }
+
+    private RBNode<T> successor(RBNode<T> node) {
+        if(node.getLeftChild()!=null){
+            return rightTillEnd(node.getLeftChild());
+        }
+        else if(node.getRightChild()!=null){
+            return leftTillEnd(node.getRightChild());
+        }
+        else return null;
+    }
+    private RBNode<T> leftTillEnd(RBNode<T> node){
+        if(node.getLeftChild()==null)return node;
+        else return leftTillEnd(node.getLeftChild());
+    }
+    private RBNode<T> rightTillEnd(RBNode<T> node){
+        if(node.getRightChild()==null)return node;
+        else return leftTillEnd(node.getRightChild());
     }
 
     @Override

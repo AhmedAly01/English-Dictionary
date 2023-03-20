@@ -166,5 +166,77 @@ public class JUnitTest {
         int actual = rbt.size();
         Assertions.assertEquals(expected, actual);
     }
+    // test deletion
+    @Test
+    public void deleteEasyCase1() {// delete leaf red node
+        int[] nums = {10,3,13,7,2,1,9,8};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(7);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(10,3,2,1,8,9,13),Arrays.asList(0,1,0,1,0,1,0));
+        Assertions.assertEquals(res, correct);
+    }
+    @Test
+    public void deleteEasyCase2() {// delete internal red node
+        int[] nums = {10,3,13,7,2,1,9,8};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(3);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(10,2,1,8,7,9,13),Arrays.asList(0,1,0,0,1,1,0));
+        Assertions.assertEquals(correct, res);
+    }
+    @Test
+    public void deleteHardCase1() {// delete internal red node
+        int[] nums = {1,2,3,0};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(0);
+        rbt.delete(1);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(2,3),Arrays.asList(0,1));
+        Assertions.assertEquals(correct, res);
+    }
+
+    @Test
+    public void deleteHardCase2() {// delete internal red node case sibling child is red lr
+        int[] nums = {1,6,10,0,7};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(0);
+        rbt.delete(7);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(6,1,10),Arrays.asList(0,0,0));
+        Assertions.assertEquals(correct, res);
+    }
+    @Test
+    public void deleteHardCase3() {// delete internal red node case sibling child is red rr
+        int[] nums = {41, 38, 31, 12, 19, 8};
+        int[] delete = {8,12,19,31,38};
+        List<List<List<Integer>>> corrects = Arrays.asList(
+                Arrays.asList(Arrays.asList(38,19,12,31,41),Arrays.asList(0,1,0,0,0)),
+                Arrays.asList(Arrays.asList(38,19,31,41),Arrays.asList(0,0,1,0)),
+                Arrays.asList(Arrays.asList(38,31,41),Arrays.asList(0,0,0)),
+                Arrays.asList(Arrays.asList(38,41),Arrays.asList(0,1)),
+                Arrays.asList(Arrays.asList(41),Arrays.asList(0)));
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        for(int i=0;i<delete.length;i++){
+            rbt.delete(delete[i]);
+            traverse(rbt.getRoot());
+            Assertions.assertEquals(corrects.get(i), res);
+        }
+    }
 
 }
