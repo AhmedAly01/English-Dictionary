@@ -1,7 +1,7 @@
 package org.DSLab2;
+import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
         AVLTree<String> tree = new AVLTree<>();
         BSTree<String> BST = new BSTree<>();// create a new binary tree
@@ -40,3 +40,4 @@ public class Main {
         System.out.println(tree.size());
     }
 }
+
