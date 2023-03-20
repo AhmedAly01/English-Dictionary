@@ -2,6 +2,9 @@ package org.DSLab2;
 
 import lombok.Getter;
 
+import static java.lang.Math.max;
+
+
 @Getter
 
 public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
@@ -220,6 +223,7 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     private RBNode<T> delete(RBNode<T> node){
         if(node == null)return null;
         if(node.getRightChild() == null && node.getLeftChild() == null){
+            size--;
             solveDeletion(node);
 //            if(node.getParent() == null) {
 //                root = node.getRightChild();
@@ -230,6 +234,7 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
             else node.getParent().setRightChild(null);
         }
         else if(node.getRightChild()!=null && node.getLeftChild() == null){
+            size--;
             solveDeletion(node);
             if(node.getParent() == null) {
                 root = node.getRightChild();
@@ -245,6 +250,7 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
             }
         }
         else if(node.getRightChild()==null && node.getLeftChild() != null){
+            size--;
             solveDeletion(node);
             if(node.getParent() == null) {
                 root = node.getLeftChild();
@@ -315,6 +321,11 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
 
     @Override
     public int height() {
-        return 0;
+        return getHeight(root);
+    }
+
+    private int getHeight(RBNode<T> node) {
+        if(node == null)return 0;
+        return 1+max(getHeight(node.getLeftChild()),getHeight(node.getRightChild()));
     }
 }
