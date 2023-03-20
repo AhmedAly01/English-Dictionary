@@ -21,14 +21,14 @@ public class Main {
         tree.insert("o");
         tree.insert("k");
 
-//        System.out.println();
-//        BST.preOrder();
-//        System.out.println();
-//        System.out.println(BST.height());
-//        System.out.println(BST.search("10"));
-//        System.out.println(BST.search("5"));
-//        System.out.println(BST.search("8"));
-//        System.out.println(BST.size());
+        System.out.println();
+        BST.preOrder();
+        System.out.println();
+        System.out.println(BST.height());
+        System.out.println(BST.search("10"));
+        System.out.println(BST.search("5"));
+        System.out.println(BST.search("8"));
+        System.out.println(BST.size());
 
         System.out.println();
         tree.preOrder();

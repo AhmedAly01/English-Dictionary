@@ -2,7 +2,7 @@ package org.DSLab2;
 
 import java.util.Objects;
 
-public class BSTree<T extends Comparable <? super T>> implements IBSTree<T> {
+class BSTree<T extends Comparable <? super T>> implements IBSTree<T> {
     private Node<T> root;// root of the tree
     private int size = 0;// size of the tree
     private boolean exist = false;

@@ -3,7 +3,7 @@ package org.DSLab2;
 
 import java.util.Objects;
 
-public class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the AVLTree class which implements the AvlTree interface
+class AVLTree<T extends Comparable <? super T>> extends BSTree<T> {// the AVLTree class which implements the AvlTree interface
     AVLNode<T> root;// the root node
     int size = 0;// the size of the tree(number of nodes)
 
