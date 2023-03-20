@@ -239,4 +239,36 @@ public class JUnitTest {
         }
     }
 
+    @Test
+    public void deleteHardCase4() {// delete internal with sibling red and none of his children are red
+        int[] nums = {10,8,15,3};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(3);
+        rbt.insert(13);
+        rbt.insert(16);
+        rbt.insert(20);
+        rbt.delete(20);
+        rbt.delete(8);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(15,10,13,16),Arrays.asList(0,0,1,0));
+        Assertions.assertEquals(correct, res);
+    }
+    @Test
+    public void deleteHardCase5() {// delete internal red node case sibling child is red lr
+        int[] nums = {1,6,10,0,7};
+        RBTree<Integer> rbt = new RBTree<>();
+        for(int i=0;i<nums.length;i++){
+            rbt.insert(nums[i]);
+        }
+        rbt.delete(0);
+        rbt.delete(7);
+        rbt.delete(100);
+        traverse(rbt.getRoot());
+        List<List<Integer>> correct = Arrays.asList(Arrays.asList(6,1,10),Arrays.asList(0,0,0));
+        Assertions.assertEquals(correct, res);
+    }
+
 }

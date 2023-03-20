@@ -140,6 +140,8 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
                 (deletedNode.getRightChild()!=null &&deletedNode.getRightChild().isColor())||
                 (deletedNode.getLeftChild()!=null &&deletedNode.getLeftChild().isColor())){
             if(!deletedNode.isColor()){
+                // in this case just one of the children is null and the other isn't or both of them are null
+                //TODO retest this case
                 if(deletedNode.getLeftChild()!=null)
                     deletedNode.getLeftChild().setColor(false);
                 if(deletedNode.getRightChild()!=null)
@@ -194,12 +196,26 @@ public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
             }
         }
         else if(sibling.isColor()){
-
+            sibling.setColor(false);
+            dbNode.getParent().setColor(true);
+            if(sibling.getParent().getValue().compareTo(sibling.getValue())>0){//ll case
+                rightSwap(sibling);
+            }
+            else{
+                //rr case
+                leftSwap(sibling);
+            }
+//            if(dbNode.getLeftChild()!=null)
+//                solveDoubleBlack(dbNode.getLeftChild());//solve(u)
+//            else if(dbNode.getRightChild()!=null)
+//                solveDoubleBlack(dbNode.getRightChild());
+            solveDoubleBlack(dbNode);
         }
 
     }
 
     private RBNode<T> delete(RBNode<T> node){
+        if(node == null)return null;
         if(node.getRightChild() == null && node.getLeftChild() == null){
             solveDeletion(node);
 //            if(node.getParent() == null) {
