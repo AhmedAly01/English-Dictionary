@@ -26,7 +26,9 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         return true;
     }
     private RBNode<T> insert(T key, RBNode<T> node){
-        if(node.getValue().compareTo(key) == 0) return null;
+        if(node.getValue().compareTo(key) == 0) {
+            return null;
+        }
         else if(node.getValue().compareTo(key) > 0){
             if(node.getLeftChild() == null){
                 size++;
@@ -53,6 +55,8 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         if(node == null)return;
         RBNode<T> parentNode = node.getParent();
         if(parentNode == null) {
+            // todo check this -- checked
+            root = node;
             node.setColor(false);
             return;
         }
@@ -112,12 +116,18 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         RBNode<T> grandParent =  node.getParent().getParent();
         node.setLeftChild(node.getParent());
         node.getParent().setRightChild(temp);
+        //todo not sure
+        if(temp!=null)
+            temp.setParent(node.getParent());
         node.getLeftChild().setParent(node);
         if(grandParent!=null){
             if(grandParent.getValue().compareTo(node.getValue())>0) grandParent.setLeftChild(node);
             else grandParent.setRightChild(node);
         }
-        else root = node;
+        else {
+            root = node;
+            node.setParent(null);
+        }
         node.setParent(grandParent);
     }
     private void rightSwap(RBNode<T> node){
@@ -125,12 +135,18 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         RBNode<T> grandParent =  node.getParent().getParent();
         node.setRightChild(node.getParent());
         node.getParent().setLeftChild(temp);
+        //todo not sure
+        if(temp!=null)
+            temp.setParent(node.getParent());
         node.getRightChild().setParent(node);
         if(grandParent != null){
             if(grandParent.getValue().compareTo(node.getValue())>0) grandParent.setLeftChild(node);
             else grandParent.setRightChild(node);
         }
-        else root = node;
+        else {
+            root = node;
+            node.setParent(null);
+        }
         node.setParent(grandParent);
     }
     @Override
@@ -176,17 +192,31 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
                 sibling.setColor(true);
             solveDoubleBlack(dbNode.getParent());
         }
-        else if(!sibling.isColor()&&(sibling.getRightChild()!=null&&sibling.getRightChild().isColor())
-                ||(sibling.getLeftChild()!=null&&sibling.getLeftChild().isColor())){
+        else if(!sibling.isColor()&&((sibling.getRightChild()!=null&&sibling.getRightChild().isColor())
+                ||(sibling.getLeftChild()!=null&&sibling.getLeftChild().isColor()))){ // sibling black one of his children red
             if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getRightChild()!=null && sibling.getRightChild().isColor()){
                 //rr
+                RBNode<T> parent = sibling.getParent();
+                if(!parent.isColor())
+                    sibling.getRightChild().setColor(false);
+                else if(parent.isColor()&&sibling.getLeftChild()!=null&&sibling.getLeftChild().isColor()){
+                    sibling.setColor(true);
+                    sibling.getParent().setColor(false);
+                    sibling.getRightChild().setColor(false);
+                }
                 leftSwap(sibling);
-                sibling.getRightChild().setColor(false);
             }
             else if(sibling.getValue().compareTo(sibling.getParent().getValue())<0&& sibling.getLeftChild()!=null && sibling.getLeftChild().isColor()){
                 //ll
+                RBNode<T> parent = sibling.getParent();
+                if(!parent.isColor())
+                    sibling.getLeftChild().setColor(false);
+                else if(parent.isColor()&&sibling.getRightChild()!=null&&sibling.getRightChild().isColor()){
+                    sibling.setColor(true);
+                    sibling.getParent().setColor(false);
+                    sibling.getLeftChild().setColor(false);
+                }
                 rightSwap(sibling);
-                sibling.getLeftChild().setColor(false);
             }
             else if(sibling.getValue().compareTo(sibling.getParent().getValue())>0&& sibling.getLeftChild()!=null && sibling.getLeftChild().isColor()){
                 //rl
@@ -228,12 +258,11 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
         if (node.getRightChild() == null && node.getLeftChild() == null) {
             size--;
             solveDeletion(node);
-//            if(node.getParent() == null) {
-//                root = node.getRightChild();
-//                node.getRightChild().setParent(null);
-//            }
+            if(node.getParent() == null) {
+                root = null;
+            }
             // check this case if you are deleting the root and the code enter to this section
-            if (node.getParent().getValue().compareTo(node.getValue()) > 0) node.getParent().setLeftChild(null);
+            else if (node.getParent().getValue().compareTo(node.getValue()) > 0) node.getParent().setLeftChild(null);
             else node.getParent().setRightChild(null);
         } else if (node.getRightChild() != null && node.getLeftChild() == null) {
             size--;
@@ -255,7 +284,8 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
                 root = node.getLeftChild();
                 node.getLeftChild().setParent(null);
             }
-            if (node.getParent().getValue().compareTo(node.getValue()) > 0) {
+            // todo not sure added else
+            else if (node.getParent().getValue().compareTo(node.getValue()) > 0) {
                 node.getParent().setLeftChild(node.getLeftChild());
                 node.getLeftChild().setParent(node.getParent());
             } else {
@@ -293,7 +323,7 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     }
     private RBNode<T> rightTillEnd(RBNode<T> node){
         if(node.getRightChild()==null)return node;
-        else return leftTillEnd(node.getRightChild());
+        else return rightTillEnd(node.getRightChild());
     }
 
     @Override
