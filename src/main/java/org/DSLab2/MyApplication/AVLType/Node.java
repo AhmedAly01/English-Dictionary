@@ -1,4 +1,4 @@
-package org.DSLab2.MyApplication;
+package org.DSLab2.MyApplication.AVLType;
 class Node {//the node class which contains the data and the left and right node
     String data ;
     int balanceFactor = 0;

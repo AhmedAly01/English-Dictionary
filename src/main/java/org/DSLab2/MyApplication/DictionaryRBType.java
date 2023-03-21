@@ -1,0 +1,104 @@
+package org.DSLab2.MyApplication;
+
+import org.DSLab2.MyApplication.RBType.RBNode;
+import org.DSLab2.MyApplication.RBType.RBTree;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class DictionaryRBType extends AbstractFactory{
+    RBTree<String> RB ;
+    DictionaryRBType(){
+        RB = new RBTree<>();
+    }
+    @Override
+    void insert(String str) {
+        RB.insert(str);
+    }
+
+    @Override
+    void delete(String str) {
+        RB.delete(str);
+    }
+
+    @Override
+    boolean search(String key) {
+        RBNode<String> node = RB.search(key);
+        if(node==null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    private void BatchExecution(String str, int type) {
+        String[] words = str.split(" ");
+        if(type==0) {
+            for (String s : words) {
+                RB.insert(s);
+            }
+        }
+        else{
+            for (String s : words) {
+                RB.delete(s);
+            }
+        }
+    }
+
+    @Override
+    void BatchInsert(String file) {
+        StringBuilder builder = new StringBuilder();
+        try(BufferedReader Buffer = new BufferedReader(new FileReader(file))){
+            String str;
+            while((str = Buffer.readLine())!=null){
+                builder.append(str);
+                builder.append(" ");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BatchExecution(builder.toString(),0);
+    }
+
+    @Override
+    void BatchDelete(String file) {
+        StringBuilder builder=new StringBuilder();
+        try (BufferedReader Buffer=new BufferedReader(new FileReader(file))){
+            String str;
+            while((str = Buffer.readLine())!=null){
+                builder.append(str).append(" ");
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        BatchExecution(builder.toString(),1);
+    }
+
+    @Override
+    int Size() {
+        return RB.size();
+    }
+
+    @Override
+    int Height() {
+        return RB.height();
+    }
+
+    @Override
+    void inorder() {
+        RB.inorder();
+    }
+
+    @Override
+    void preorder() {
+        RB.preorder();
+    }
+
+    @Override
+    void postorder() {
+        RB.postorder();
+    }
+}

@@ -1,10 +1,12 @@
-package org.DSLab2.MyApplication;
+package org.DSLab2.MyApplication.AVLType;
+
+import org.DSLab2.MyApplication.AVLType.Node;
 
 public class AVLDictionary implements AVLDictionaryIF{
     Node root;//the root node
     int size = 0;//the size of the tree(number of nodes)
 
-    AVLDictionary() {//the constructor of the tree class
+    public AVLDictionary() {//the constructor of the tree class
         this.root = null;
     }
 
@@ -219,7 +221,7 @@ public class AVLDictionary implements AVLDictionaryIF{
         System.out.println();
     }
 
-    public void inorder(Node node) {//the method that print the tree in inorder traversal
+    private void inorder(Node node) {//the method that print the tree in inorder traversal
         if (node == null) {
             return;
         }
@@ -233,7 +235,7 @@ public class AVLDictionary implements AVLDictionaryIF{
         System.out.println();
     }
 
-    public void preorder(Node node) {//the method that print the tree in preorder traversal
+    private void preorder(Node node) {//the method that print the tree in preorder traversal
         if (node == null) {
             return;
         }
@@ -247,7 +249,7 @@ public class AVLDictionary implements AVLDictionaryIF{
         System.out.println();
     }
 
-    public void postorder(Node node) {//the method that print the tree in postorder traversal
+    private void postorder(Node node) {//the method that print the tree in postorder traversal
         if (node == null) {
             return;
         }

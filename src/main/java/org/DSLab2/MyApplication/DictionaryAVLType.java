@@ -1,16 +1,15 @@
 package org.DSLab2.MyApplication;
 
-import org.DSLab2.AVL.AVL_Tree;
-
+import org.DSLab2.MyApplication.AVLType.AVLDictionary;
+import org.DSLab2.MyApplication.AVLType.AVLDictionary;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Dictionary implements DictionaryIF{
+public class DictionaryAVLType extends AbstractFactory{
     AVLDictionary AVL;
-    Dictionary(){
-        AVL = new AVLDictionary();
+    DictionaryAVLType(){
+        this.AVL = new AVLDictionary();
     }
 
     @Override
@@ -29,7 +28,7 @@ public class Dictionary implements DictionaryIF{
         return temp;
     }
 
-    public void BatchExecution(String str,int type){
+    private void BatchExecution(String str,int type){
         String[] words = str.split(" ");
         if(type==0) {
             for (String s : words) {

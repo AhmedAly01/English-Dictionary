@@ -1,4 +1,6 @@
-package org.DSLab2.MyApplication;
+package org.DSLab2.MyApplication.AVLType;
+
+import org.DSLab2.MyApplication.AVLType.Node;
 
 public interface AVLDictionaryIF {
     public int Getsize();
@@ -35,13 +37,8 @@ public interface AVLDictionaryIF {
 
     public void inorder();
 
-    public void inorder(Node node);
 
     public void preorder();
 
-    public void preorder(Node node);
-
     public void postorder();
-
-    public void postorder(Node node);
 }
