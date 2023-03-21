@@ -2,11 +2,17 @@ package org.DSLab2.MyApplication.RBType;
 
 
 public interface RBTreeIF<T extends Comparable<T>> {
-    RBNode<T> insert(T key);
-    RBNode<T> delete(T key);
-    RBNode<T> search(T key);
-    int size();
-    int height();
+    public int size();
+
+    public boolean isEmpty();
+
+    public boolean search(T data);
+
+    public boolean insert(T data);
+
+    public boolean delete(T data);
+
+    public int height();
     void inorder();
 
 

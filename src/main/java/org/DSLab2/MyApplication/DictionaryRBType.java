@@ -24,13 +24,7 @@ public class DictionaryRBType extends AbstractFactory{
 
     @Override
     boolean search(String key) {
-        RBNode<String> node = RB.search(key);
-        if(node==null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return RB.search(key);
     }
 
     private void BatchExecution(String str, int type) {
