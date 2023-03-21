@@ -1,6 +1,5 @@
 package org.DSLab2.MyApplication;
 
-import org.DSLab2.MyApplication.RBType.RBNode;
 import org.DSLab2.MyApplication.RBType.RBTree;
 
 import java.io.BufferedReader;
@@ -13,13 +12,13 @@ public class DictionaryRBType extends AbstractFactory{
         RB = new RBTree<>();
     }
     @Override
-    void insert(String str) {
-        RB.insert(str);
+    boolean insert(String str) {
+        return RB.insert(str);
     }
 
     @Override
-    void delete(String str) {
-        RB.delete(str);
+    boolean delete(String str) {
+        return RB.delete(str);
     }
 
     @Override

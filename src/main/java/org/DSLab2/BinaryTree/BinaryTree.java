@@ -190,26 +190,4 @@ public class BinaryTree {
 
     }
 
-    public static void main(String[] args) {
-        BinaryTree BST = new BinaryTree();// create a new binary tree 
-        //this insert and delete methods working poperly
-        //so this is a test for some methods 
-        //i test the delete and it works fine
-        //have a good day
-        BST.insertNode(10);
-        BST.insertNode(5);
-        BST.insertNode(15);
-        BST.insertNode(3);
-        BST.insertNode(7);
-        BST.insertNode(12);
-        BST.insertNode(18);
-        System.out.println();        
-        System.out.println(BST.height());
-        System.out.println(BST.FidnMin());
-        System.out.println(BST.FindMax());
-        System.out.println(BST.searchNode(10));
-        System.out.println(BST.searchNode(5));
-        System.out.println(BST.searchNode(8));
-        System.out.println(BST.size());
-    }
 }

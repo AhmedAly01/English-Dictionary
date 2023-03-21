@@ -1,13 +1,9 @@
 package org.DSLab2.MyApplication;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 public abstract class AbstractFactory {
-    abstract void insert(String str);
+    abstract boolean insert(String str);
 
-    abstract void delete(String str);
+    abstract boolean delete(String str);
 
     abstract boolean search(String str) ;
     abstract void BatchInsert(String file);

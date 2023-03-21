@@ -1,31 +1,30 @@
 package org.DSLab2.MyApplication;
 
 import org.DSLab2.MyApplication.AVLType.AVLDictionary;
-import org.DSLab2.MyApplication.AVLType.AVLDictionary;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class DictionaryAVLType extends AbstractFactory{
-    AVLDictionary AVL;
+    AVLDictionary<String> AVL;
     DictionaryAVLType(){
-        this.AVL = new AVLDictionary();
+        this.AVL = new AVLDictionary<String>();
     }
 
     @Override
-    public void insert(String str) {
-        AVL.insert(str);
+    public boolean insert(String str) {
+        return AVL.insert(str);
     }
 
     @Override
-    public void delete(String str) {
-        AVL.delete(str);
+    public boolean delete(String str) {
+        return AVL.delete(str);
     }
 
     @Override
     public boolean search(String str) {
-        boolean temp = AVL.searchNode(str);
-        return temp;
+        return AVL.searchNode(str);
     }
 
     private void BatchExecution(String str,int type){

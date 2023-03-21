@@ -1,39 +1,37 @@
 package org.DSLab2.MyApplication.AVLType;
 
-import org.DSLab2.MyApplication.AVLType.Node;
-
-public interface AVLDictionaryIF {
+public interface AVLDictionaryIF<T> {
     public int Getsize();
 
     public boolean isEmpty();
 
-    public int balanceFactor(Node node);
+    public int balanceFactor(Node<T> node);
 
-    public int height(Node node);
+    public int height(Node<T> node);
 
-    public Node rotateRight(Node node);
+    public Node<T> rotateRight(Node<T> node);
 
-    public Node rotateLeft(Node node);
+    public Node<T> rotateLeft(Node<T> node);
 
-    public boolean searchNode(String data);
+    public boolean searchNode(T data);
 
-    public boolean search(Node node, String data);
+    public boolean search(Node<T> node, T data);
 
-    public String FindMin();
+    public T FindMin();
 
-    public String FindMax();
+    public T FindMax();
 
-    public Node FindMax(Node node);
+    public Node<T> FindMax(Node<T> node);
 
-    public Node FindMin(Node node);
+    public Node<T> FindMin(Node<T> node);
 
-    public void insert(String data);
+    public boolean insert(T data);
 
-    public Node insert(Node node, String data);
+    public Node<T> insert(Node<T> node, T data);
 
-    public void delete(String data);
+    public boolean delete(T data);
 
-    public Node delete(Node node, String data);
+    public Node<T> delete(Node<T> node, T data);
 
     public void inorder();
 

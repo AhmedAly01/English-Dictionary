@@ -269,21 +269,5 @@ public class AVL_Tree implements AvlTree {//the org.DSLab2.AVL.AVL_Tree class wh
         System.out.print(node.data + " ");
     }
 
-    public static void main(String[] args) {
-        AVL_Tree tree = new AVL_Tree();
-        tree.insert(10);
-        tree.insert(20);
-        tree.insert(30);
-        tree.insert(40);
-        tree.insert(50);
-        tree.insert(25);
-        tree.preorder();
-        System.out.println("the height of the tree is " + tree.TreeHeight());
-        System.out.println("the size of the tree is " + tree.Getsize());
-        System.out.println("the max value in the tree is " + tree.FindMax());
-        System.out.println("the min value in the tree is " + tree.FindMin());
-        tree.delete(30);
-        tree.preorder();
-    }
 }
 
