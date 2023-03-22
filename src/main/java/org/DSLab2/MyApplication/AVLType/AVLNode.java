@@ -1,5 +1,15 @@
 package org.DSLab2.MyApplication.AVLType;
-class AVLNode<T> {//the node class which contains the data and the left and right node
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AVLNode<T> {//the node class which contains the data and the left and right node
     T data ;
     int balanceFactor = 0;
     int height = 1;

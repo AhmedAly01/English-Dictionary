@@ -26,7 +26,7 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
 
     public int TreeHeight() {//the method to get the height of the tree
         if (root == null) {
-            return -1;
+            return 0;
         } else {
             return root.height;
         }
