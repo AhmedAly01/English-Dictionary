@@ -77,20 +77,28 @@ public class MainDictionary {
                     System.out.println("Time Taken = " + end);
                 }
                 else if (command.equalsIgnoreCase("batch")) {
-                    System.out.print("Enter File Path: ");
-                    String file = sc.nextLine();
-                    long start = System.nanoTime();
+                    long start, end = 0;
                     if (word.equalsIgnoreCase("insert")) {
+                        System.out.print("Enter File Path: ");
+                        String file = sc.nextLine();
+                        start = System.nanoTime();
                         int[] res = tree.BatchInsert(file);
+                        end = System.nanoTime() - start;
                         System.out.println("Successful Inserts = " + res[0]);
                         System.out.println("Failed Inserts = " + res[1]);
                     }
                     else if (word.equalsIgnoreCase("delete")) {
+                        System.out.print("Enter File Path: ");
+                        String file = sc.nextLine();
+                        start = System.nanoTime();
                         int[] res = tree.BatchDelete(file);
+                        end = System.nanoTime() - start;
                         System.out.println("Successful Deletions = " + res[0]);
                         System.out.println("Failed Deletions = " + res[1]);
                     }
-                    long end = System.nanoTime() - start;
+                    else {
+                        System.out.println("Invalid Command");
+                    }
                     System.out.println("Time Taken = " + end);
                 }
             }
