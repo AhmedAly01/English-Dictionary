@@ -1,13 +1,11 @@
-package org.DSLab2;
+package org.DSLab2.MyApplication.RBType;
 
 import lombok.Getter;
 
 import static java.lang.Math.max;
 
-
 @Getter
-
-public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
+public class RBTree <T extends Comparable<T>> implements RBTreeIF<T> {
     private RBNode<T> root = null;
     private int size = 0;
 
@@ -355,5 +353,50 @@ public class RBTree <T extends Comparable<T>> implements IBSTree<T> {
     private int getHeight(RBNode<T> node) {
         if(node == null)return 0;
         return 1+max(getHeight(node.getLeftChild()),getHeight(node.getRightChild()));
+    }
+
+    @Override
+    public void inorder() {
+        inorder(this.root);
+        System.out.println();
+    }
+
+    private void inorder(RBNode<T> node) {
+        if (node == null) {
+            return;
+        }
+        inorder(node.getLeftChild());
+        System.out.print(node.getValue()+ " ");
+        inorder(node.getRightChild());
+    }
+
+    @Override
+    public void preorder() {
+        preorder(this.root);
+        System.out.println();
+    }
+
+    private void preorder(RBNode<T> node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.getValue() + " ");
+        preorder(node.getLeftChild());
+        preorder(node.getRightChild());
+    }
+
+    @Override
+    public void postorder() {
+        postorder(this.root);
+        System.out.println();
+    }
+
+    private void postorder(RBNode<T> node) {
+        if (node == null) {
+            return;
+        }
+        postorder(node.getLeftChild());
+        postorder(node.getRightChild());
+        System.out.print(node.getValue() + " ");
     }
 }

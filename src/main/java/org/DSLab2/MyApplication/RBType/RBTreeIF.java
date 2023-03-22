@@ -1,6 +1,7 @@
-package org.DSLab2;
+package org.DSLab2.MyApplication.RBType;
 
-interface IBSTree<T extends Comparable <? super T>> {
+
+public interface RBTreeIF<T extends Comparable<T>> {
     public int size();
 
     public boolean isEmpty();
@@ -12,6 +13,12 @@ interface IBSTree<T extends Comparable <? super T>> {
     public boolean delete(T data);
 
     public int height();
+    void inorder();
 
+
+    void preorder();
+
+
+    void postorder();
 
 }

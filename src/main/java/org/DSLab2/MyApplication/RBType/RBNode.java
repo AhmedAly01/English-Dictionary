@@ -1,4 +1,4 @@
-package org.DSLab2;
+package org.DSLab2.MyApplication.RBType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
