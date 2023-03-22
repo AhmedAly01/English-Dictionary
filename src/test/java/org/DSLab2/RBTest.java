@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class JUnitTest {
+public class RBTest {
     // these methods to help in assertion
     List<List<Integer>> res = new ArrayList<>();
     void traverse (RBNode<Integer> root){

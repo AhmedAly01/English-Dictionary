@@ -5,33 +5,33 @@ public interface AVLDictionaryIF<T> {
 
     public boolean isEmpty();
 
-    public int balanceFactor(Node<T> node);
+    public int balanceFactor(AVLNode<T> AVLNode);
 
-    public int height(Node<T> node);
+    public int height(AVLNode<T> AVLNode);
 
-    public Node<T> rotateRight(Node<T> node);
+    public AVLNode<T> rotateRight(AVLNode<T> AVLNode);
 
-    public Node<T> rotateLeft(Node<T> node);
+    public AVLNode<T> rotateLeft(AVLNode<T> AVLNode);
 
     public boolean searchNode(T data);
 
-    public boolean search(Node<T> node, T data);
+    public boolean search(AVLNode<T> AVLNode, T data);
 
     public T FindMin();
 
     public T FindMax();
 
-    public Node<T> FindMax(Node<T> node);
+    public AVLNode<T> FindMax(AVLNode<T> AVLNode);
 
-    public Node<T> FindMin(Node<T> node);
+    public AVLNode<T> FindMin(AVLNode<T> AVLNode);
 
     public boolean insert(T data);
 
-    public Node<T> insert(Node<T> node, T data);
+    public AVLNode<T> insert(AVLNode<T> AVLNode, T data);
 
     public boolean delete(T data);
 
-    public Node<T> delete(Node<T> node, T data);
+    public AVLNode<T> delete(AVLNode<T> AVLNode, T data);
 
     public void inorder();
 

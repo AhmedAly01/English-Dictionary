@@ -1,7 +1,7 @@
 package org.DSLab2.MyApplication.AVLType;
 
 public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T>{
-    Node<T> root;//the root node
+    AVLNode<T> root;//the root node
     int size = 0;//the size of the tree(number of nodes)
 
     public AVLDictionary() {//the constructor of the tree class
@@ -20,8 +20,8 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         }
     }
 
-    public int balanceFactor(Node<T> node) {//the method to get the balance factor of a node
-        return height(node.left) - height(node.right);
+    public int balanceFactor(AVLNode<T> AVLNode) {//the method to get the balance factor of a node
+        return height(AVLNode.left) - height(AVLNode.right);
     }
 
     public int TreeHeight() {//the method to get the height of the tree
@@ -32,17 +32,17 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         }
     }
 
-    public int height(Node<T> node) {//the method to get the height of a node
-        if (node == null) {
+    public int height(AVLNode<T> AVLNode) {//the method to get the height of a node
+        if (AVLNode == null) {
             return 0;
         } else {
-            return node.height;
+            return AVLNode.height;
         }
     }
 
-    public Node<T> rotateRight(Node<T> A) {//the method to rotate the tree to the right
-        Node<T> B = A.left;
-        Node<T> C = B.right;
+    public AVLNode<T> rotateRight(AVLNode<T> A) {//the method to rotate the tree to the right
+        AVLNode<T> B = A.left;
+        AVLNode<T> C = B.right;
         B.right = A;
         A.left = C;
         if (C != null) {
@@ -56,9 +56,9 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         return B;
     }
 
-    public Node<T> rotateLeft(Node<T> A) {//the method to rotate the tree to the left
-        Node<T> B = A.right;
-        Node<T> C = B.left;
+    public AVLNode<T> rotateLeft(AVLNode<T> A) {//the method to rotate the tree to the left
+        AVLNode<T> B = A.right;
+        AVLNode<T> C = B.left;
         if (A == root) {
             this.root = B;
         }
@@ -80,16 +80,16 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         }
     }
 
-    public boolean search(Node<T> node, T data) {//the method to search for a node in the tree
-        if (node == null) {
+    public boolean search(AVLNode<T> AVLNode, T data) {//the method to search for a node in the tree
+        if (AVLNode == null) {
             return false;
         }
-        if (node.data.compareTo(data) == 0) {
+        if (AVLNode.data.compareTo(data) == 0) {
             return true;
-        } else if (data.compareTo(node.data) < 0) {
-            return search(node.left, data);
+        } else if (data.compareTo(AVLNode.data) < 0) {
+            return search(AVLNode.left, data);
         } else {
-            return search(node.right, data);
+            return search(AVLNode.right, data);
         }
     }
 
@@ -97,15 +97,15 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         if (this.root == null) {
             return null;
         }
-        Node<T> node = FindMax(this.root);
-        return node.data;
+        AVLNode<T> AVLNode = FindMax(this.root);
+        return AVLNode.data;
     }
 
-    public Node<T> FindMax(Node<T> node) {//the method to find the maximum node in the tree
-        if (node.right == null) {
-            return node;
+    public AVLNode<T> FindMax(AVLNode<T> AVLNode) {//the method to find the maximum node in the tree
+        if (AVLNode.right == null) {
+            return AVLNode;
         } else {
-            return FindMax(node.right);
+            return FindMax(AVLNode.right);
         }
     }
 
@@ -113,15 +113,15 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         if (root == null) {
             return null;
         }
-        Node<T> node = FindMin(root);
-        return node.data;
+        AVLNode<T> AVLNode = FindMin(root);
+        return AVLNode.data;
     }
 
-    public Node<T> FindMin(Node<T> node) {//the method tha to find the minimum node in the tree
-        if (node.left == null) {
-            return node;
+    public AVLNode<T> FindMin(AVLNode<T> AVLNode) {//the method tha to find the minimum node in the tree
+        if (AVLNode.left == null) {
+            return AVLNode;
         } else {
-            return FindMin(node.left);
+            return FindMin(AVLNode.left);
         }
     }
 
@@ -134,33 +134,33 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         return true;
     }
 
-    public Node<T> insert(Node<T> node, T data) {//the method to insert a node in the tree
-        if (node == null) {//if we reach beyond the leaf node then create a new node
-            node = new Node<>(data);
-            return node;
-        } else if (data.compareTo(node.data) < 0) {//if the data is less than the node data then go to the left
-            node.left = insert(node.left, data);
+    public AVLNode<T> insert(AVLNode<T> AVLNode, T data) {//the method to insert a node in the tree
+        if (AVLNode == null) {//if we reach beyond the leaf node then create a new node
+            AVLNode = new AVLNode<>(data);
+            return AVLNode;
+        } else if (data.compareTo(AVLNode.data) < 0) {//if the data is less than the node data then go to the left
+            AVLNode.left = insert(AVLNode.left, data);
         } else {
-            node.right = insert(node.right, data);//if the data is greater than the node data then go to the right
+            AVLNode.right = insert(AVLNode.right, data);//if the data is greater than the node data then go to the right
         }
-        node.height = Math.max(height(node.left), height(node.right)) + 1;//update the height of the node
-        node.balanceFactor = balanceFactor(node);//update the balance factor of the node
-        if (node.balanceFactor > 1) {//if the balance factor is greater than 1 then we need to rotate the tree
-            if (balanceFactor(node.left) >= 0) {//if the balance factor of the left child is greater than or equal to 0 then we need to rotate the tree to the right
-                node = rotateRight(node);
+        AVLNode.height = Math.max(height(AVLNode.left), height(AVLNode.right)) + 1;//update the height of the node
+        AVLNode.balanceFactor = balanceFactor(AVLNode);//update the balance factor of the node
+        if (AVLNode.balanceFactor > 1) {//if the balance factor is greater than 1 then we need to rotate the tree
+            if (balanceFactor(AVLNode.left) >= 0) {//if the balance factor of the left child is greater than or equal to 0 then we need to rotate the tree to the right
+                AVLNode = rotateRight(AVLNode);
             } else {//if the balance factor of the left child is less than 0 then we need to rotate the tree to the left then rotate the tree to the right
-                node.left = rotateLeft(node.left);
-                node = rotateRight(node);
+                AVLNode.left = rotateLeft(AVLNode.left);
+                AVLNode = rotateRight(AVLNode);
             }
-        } else if (node.balanceFactor < -1) {//if the balance factor is less than -1 then we need to rotate the tree
-            if (balanceFactor(node.right) <= 0) {//if the balance factor of the right child is less than or equal to 0 then we need to rotate the tree to the left
-                node = rotateLeft(node);//rotate the tree to the left
+        } else if (AVLNode.balanceFactor < -1) {//if the balance factor is less than -1 then we need to rotate the tree
+            if (balanceFactor(AVLNode.right) <= 0) {//if the balance factor of the right child is less than or equal to 0 then we need to rotate the tree to the left
+                AVLNode = rotateLeft(AVLNode);//rotate the tree to the left
             } else {//if the balance factor of the right child is greater than 0 then we need to rotate the tree to the right then rotate the tree to the left
-                node.right = rotateRight(node.right);
-                node = rotateLeft(node);
+                AVLNode.right = rotateRight(AVLNode.right);
+                AVLNode = rotateLeft(AVLNode);
             }
         }
-        return node;
+        return AVLNode;
     }
 
     public boolean delete(T data) {//the method that the user call to delete a node in the tree
@@ -175,46 +175,46 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         }
     }
 
-    public Node<T> delete(Node<T> node, T data) {
-        if (node == null) {//if the node is not found then return null
+    public AVLNode<T> delete(AVLNode<T> AVLNode, T data) {
+        if (AVLNode == null) {//if the node is not found then return null
             return null;
-        } else if (data.compareTo(node.data) < 0) {//if the data is less than the node data then go to the left
-            node.left = delete(node.left, data);//if the data is equal to the node data then delete the node
-        } else if (data.compareTo(node.data) > 0) {//if the data is greater than the node data then go to the right
-            node.right = delete(node.right, data);//if the data is equal to the node data then delete the node
+        } else if (data.compareTo(AVLNode.data) < 0) {//if the data is less than the node data then go to the left
+            AVLNode.left = delete(AVLNode.left, data);//if the data is equal to the node data then delete the node
+        } else if (data.compareTo(AVLNode.data) > 0) {//if the data is greater than the node data then go to the right
+            AVLNode.right = delete(AVLNode.right, data);//if the data is equal to the node data then delete the node
         } else {
-            if (node.right == null && node.left == null) {//if the node is the leaf node then set it with null
-                node = null;
-                return node;
-            } else if (node.right == null) {//if the node has only one left child then replace the node with its child
-                node = node.left;
-            } else if (node.left == null) {//if the node has only one right child then replace the node with its child
-                node = node.right;
+            if (AVLNode.right == null && AVLNode.left == null) {//if the node is the leaf node then set it with null
+                AVLNode = null;
+                return AVLNode;
+            } else if (AVLNode.right == null) {//if the node has only one left child then replace the node with its child
+                AVLNode = AVLNode.left;
+            } else if (AVLNode.left == null) {//if the node has only one right child then replace the node with its child
+                AVLNode = AVLNode.right;
             } else {
-                Node<T> temp = FindMin(node.right);//if the node has two children then find the minimum node in the right subtree
-                node.data = temp.data;//replace the node data with the minimum node data
-                node.right = delete(node.right, temp.data);//delete the minimum node
+                AVLNode<T> temp = FindMin(AVLNode.right);//if the node has two children then find the minimum node in the right subtree
+                AVLNode.data = temp.data;//replace the node data with the minimum node data
+                AVLNode.right = delete(AVLNode.right, temp.data);//delete the minimum node
             }
-            node.height = Math.max(height(node.left), height(node.right)) + 1;//update the height of the node
-            node.balanceFactor = balanceFactor(node);//update the balance factor of the node
-            if (node.balanceFactor > 1) {//if the balance factor is greater than 1 then we need to rotate the tree
-                if (balanceFactor(node.left) >= 0) {//(left)if the balance factor of the left child is greater than or equal to 0 then we need to rotate the tree to the right
-                    node = rotateRight(node);
+            AVLNode.height = Math.max(height(AVLNode.left), height(AVLNode.right)) + 1;//update the height of the node
+            AVLNode.balanceFactor = balanceFactor(AVLNode);//update the balance factor of the node
+            if (AVLNode.balanceFactor > 1) {//if the balance factor is greater than 1 then we need to rotate the tree
+                if (balanceFactor(AVLNode.left) >= 0) {//(left)if the balance factor of the left child is greater than or equal to 0 then we need to rotate the tree to the right
+                    AVLNode = rotateRight(AVLNode);
                 } else {//(left right)if the balance factor of the left child is less than 0 then we need to rotate the tree to the left then rotate the tree to the right
-                    node.left = rotateLeft(node.left);//if the balance factor of the left child is less than 0 then we need to rotate the tree to the left then rotate the tree to the right
-                    node = rotateRight(node);//rotate the tree to the right
+                    AVLNode.left = rotateLeft(AVLNode.left);//if the balance factor of the left child is less than 0 then we need to rotate the tree to the left then rotate the tree to the right
+                    AVLNode = rotateRight(AVLNode);//rotate the tree to the right
                 }
-            } else if (node.balanceFactor < -1) {//if the balance factor is less than -1 then we need to rotate the tree
-                if (balanceFactor(node.right) <= 0) {//(Right)if the balance factor of the right child is less than or equal to 0 then we need to rotate the tree to the left
-                    node = rotateLeft(node);
+            } else if (AVLNode.balanceFactor < -1) {//if the balance factor is less than -1 then we need to rotate the tree
+                if (balanceFactor(AVLNode.right) <= 0) {//(Right)if the balance factor of the right child is less than or equal to 0 then we need to rotate the tree to the left
+                    AVLNode = rotateLeft(AVLNode);
                 } else {//(Right Left)if the balance factor of the right child is greater than 0 then we need to rotate the tree to the right then rotate the tree to the left
-                    node.right = rotateRight(node.right);
-                    node = rotateLeft(node);
+                    AVLNode.right = rotateRight(AVLNode.right);
+                    AVLNode = rotateLeft(AVLNode);
                 }
             }
         }
-        node.height = Math.max(height(node.left), height(node.right)) + 1;
-        return node;
+        AVLNode.height = Math.max(height(AVLNode.left), height(AVLNode.right)) + 1;
+        return AVLNode;
     }
 
     public void inorder() {//the method that the user call to print the tree in inorder traversal
@@ -222,13 +222,13 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         System.out.println();
     }
 
-    private void inorder(Node<T> node) {//the method that print the tree in inorder traversal
-        if (node == null) {
+    private void inorder(AVLNode<T> AVLNode) {//the method that print the tree in inorder traversal
+        if (AVLNode == null) {
             return;
         }
-        inorder(node.left);
-        System.out.print(node.data + " ");
-        inorder(node.right);
+        inorder(AVLNode.left);
+        System.out.print(AVLNode.data + " ");
+        inorder(AVLNode.right);
     }
 
     public void preorder() {//the method that the user call to print the tree in preorder traversal
@@ -236,13 +236,13 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         System.out.println();
     }
 
-    private void preorder(Node<T> node) {//the method that print the tree in preorder traversal
-        if (node == null) {
+    private void preorder(AVLNode<T> AVLNode) {//the method that print the tree in preorder traversal
+        if (AVLNode == null) {
             return;
         }
-        System.out.print(node.data + " ");
-        preorder(node.left);
-        preorder(node.right);
+        System.out.print(AVLNode.data + " ");
+        preorder(AVLNode.left);
+        preorder(AVLNode.right);
     }
 
     public void postorder() {//the method that the user call to print the tree in postorder traversal
@@ -250,12 +250,12 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         System.out.println();
     }
 
-    private void postorder(Node<T> node) {//the method that print the tree in postorder traversal
-        if (node == null) {
+    private void postorder(AVLNode<T> AVLNode) {//the method that print the tree in postorder traversal
+        if (AVLNode == null) {
             return;
         }
-        postorder(node.left);
-        postorder(node.right);
-        System.out.print(node.data + " ");
+        postorder(AVLNode.left);
+        postorder(AVLNode.right);
+        System.out.print(AVLNode.data + " ");
     }
 }
