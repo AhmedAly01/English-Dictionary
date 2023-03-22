@@ -6,8 +6,8 @@ public abstract class AbstractFactory {
     abstract boolean delete(String str);
 
     abstract boolean search(String str) ;
-    abstract void BatchInsert(String file);
-    abstract void BatchDelete(String file);
+    abstract int[] BatchInsert(String file);
+    abstract int[] BatchDelete(String file);
     abstract int Size();
     abstract int Height();
     abstract void inorder();

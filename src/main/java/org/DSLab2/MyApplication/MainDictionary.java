@@ -1,7 +1,5 @@
 package org.DSLab2.MyApplication;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
 
 import static org.DSLab2.MyApplication.FactoryProducer.GetDictionaryTreeType;
@@ -49,31 +47,51 @@ public class MainDictionary {
                 String command = in[0];
                 String word = in[1];
                 if (command.equalsIgnoreCase("insert")) {
+                    long start = System.nanoTime();
                     if (tree.insert(word)) {
                         System.out.println("Inserted Successfully");
                     } else {
                         System.out.println("Word Already in Dictionary");
                     }
-                } else if (command.equalsIgnoreCase("delete")) {
+                    long end = System.nanoTime() - start;
+                    System.out.println("Time Taken = " + end);
+                }
+                else if (command.equalsIgnoreCase("delete")) {
+                    long start = System.nanoTime();
                     if (tree.delete(word)) {
                         System.out.println("Deleted Successfully");
                     } else {
                         System.out.println("Word Not in Dictionary");
                     }
-                } else if (command.equalsIgnoreCase("search")) {
+                    long end = System.nanoTime() - start;
+                    System.out.println("Time Taken = " + end);
+                }
+                else if (command.equalsIgnoreCase("search")) {
+                    long start = System.nanoTime();
                     if (tree.search(word)) {
                         System.out.println("Found!");
                     } else {
                         System.out.println("Not Found!");
                     }
-                } else if (command.equalsIgnoreCase("batch")) {
+                    long end = System.nanoTime() - start;
+                    System.out.println("Time Taken = " + end);
+                }
+                else if (command.equalsIgnoreCase("batch")) {
                     System.out.print("Enter File Path: ");
                     String file = sc.nextLine();
+                    long start = System.nanoTime();
                     if (word.equalsIgnoreCase("insert")) {
-                        tree.BatchInsert(file);
-                    } else if (word.equalsIgnoreCase("delete")) {
-                        tree.BatchDelete(file);
+                        int[] res = tree.BatchInsert(file);
+                        System.out.println("Successful Inserts = " + res[0]);
+                        System.out.println("Failed Inserts = " + res[1]);
                     }
+                    else if (word.equalsIgnoreCase("delete")) {
+                        int[] res = tree.BatchDelete(file);
+                        System.out.println("Successful Deletions = " + res[0]);
+                        System.out.println("Failed Deletions = " + res[1]);
+                    }
+                    long end = System.nanoTime() - start;
+                    System.out.println("Time Taken = " + end);
                 }
             }
         }

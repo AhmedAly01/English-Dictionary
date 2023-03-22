@@ -10,6 +10,5 @@ class Node<T> {//the node class which contains the data and the left and right n
         this.data = data;
         this.left = null;
         this.right = null;
-        height = 1;
     }
 }

@@ -26,22 +26,34 @@ public class DictionaryRBType extends AbstractFactory{
         return RB.search(key);
     }
 
-    private void BatchExecution(String str, int type) {
+    private int[] BatchExecution(String str, int type) {
         String[] words = str.split(" ");
+        int success = 0, fail = 0;
         if(type==0) {
             for (String s : words) {
-                RB.insert(s);
+                if (RB.insert(s)) {
+                    success++;
+                }
+                else {
+                    fail++;
+                }
             }
         }
         else{
             for (String s : words) {
-                RB.delete(s);
+                if (RB.delete(s)) {
+                    success++;
+                }
+                else {
+                    fail++;
+                }
             }
         }
+        return new int[]{success, fail};
     }
 
     @Override
-    void BatchInsert(String file) {
+    int[] BatchInsert(String file) {
         StringBuilder builder = new StringBuilder();
         try(BufferedReader Buffer = new BufferedReader(new FileReader(file))){
             String str;
@@ -52,11 +64,11 @@ public class DictionaryRBType extends AbstractFactory{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        BatchExecution(builder.toString(),0);
+        return BatchExecution(builder.toString(),0);
     }
 
     @Override
-    void BatchDelete(String file) {
+    int[] BatchDelete(String file) {
         StringBuilder builder=new StringBuilder();
         try (BufferedReader Buffer=new BufferedReader(new FileReader(file))){
             String str;
@@ -67,7 +79,7 @@ public class DictionaryRBType extends AbstractFactory{
         catch (IOException e){
             throw new RuntimeException(e);
         }
-        BatchExecution(builder.toString(),1);
+        return BatchExecution(builder.toString(),1);
     }
 
     @Override

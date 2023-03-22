@@ -170,6 +170,7 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
         else {
             size--;//decrease the size of the tree
             this.root = delete(this.root, data);//call the method to delete the node
+            if (this.root != null) this.root.height = Math.max(height(this.root.left), height(this.root.right)) + 1;
             return true;
         }
     }
@@ -212,6 +213,7 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
                 }
             }
         }
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
         return node;
     }
 

@@ -27,22 +27,34 @@ public class DictionaryAVLType extends AbstractFactory{
         return AVL.searchNode(str);
     }
 
-    private void BatchExecution(String str,int type){
+    private int[] BatchExecution(String str,int type){
+        int success = 0, fail = 0;
         String[] words = str.split(" ");
         if(type==0) {
             for (String s : words) {
-                AVL.insert(s);
+                if (AVL.insert(s)) {
+                    success++;
+                }
+                else {
+                    fail++;
+                }
             }
         }
         else{
             for (String s : words) {
-                AVL.delete(s);
+                if (AVL.delete(s)) {
+                    success++;
+                }
+                else {
+                    fail++;
+                }
             }
         }
+        return new int[]{success, fail};
     }
 
     @Override
-    public void BatchInsert(String file) {
+    public int[] BatchInsert(String file) {
         StringBuilder builder = new StringBuilder();
         try(BufferedReader Buffer = new BufferedReader(new FileReader(file))){
             String str;
@@ -53,11 +65,11 @@ public class DictionaryAVLType extends AbstractFactory{
         catch (IOException e){
             e.printStackTrace();
         }
-        BatchExecution(builder.toString(),0);
+        return BatchExecution(builder.toString(),0);
     }
 
     @Override
-    public void BatchDelete(String file) {
+    public int[] BatchDelete(String file) {
         StringBuilder builder = new StringBuilder();
         try(BufferedReader Buffer = new BufferedReader(new FileReader(file))){
             String str;
@@ -68,7 +80,7 @@ public class DictionaryAVLType extends AbstractFactory{
         catch (IOException e){
             e.printStackTrace();
         }
-        BatchExecution(builder.toString(),1);
+        return BatchExecution(builder.toString(),1);
     }
 
     @Override
