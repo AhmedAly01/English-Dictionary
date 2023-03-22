@@ -1,6 +1,7 @@
 package org.DSLab2;
 
 
+
 import org.DSLab2.AVL.AVL_Tree;
 import org.DSLab2.MyApplication.AVLType.AVLDictionary;
 import org.DSLab2.MyApplication.AVLType.AVLNode;
@@ -251,7 +252,7 @@ public class AVLTest {
     public void testHeightInConsecutiveInsertsAndDeletes() { //root's right child isn't null
         int[] toBeInserted =   {20,4,26,3,9,30,21,2,7,11};
         int[] expectedHeight = {1 ,2,2 ,3,3,3 ,3 ,4,4,4};
-        AVLDictionary<Integer> avl = new AVLDictionary<>();
+        AVL_Tree avl = new AVL_Tree();
         for (int i=0;i < toBeInserted.length;i++) {
             avl.insert(toBeInserted[i]);
             Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());
@@ -288,5 +289,36 @@ public class AVLTest {
         for (int i=0;i < toFind.size();i++) {
             Assertions.assertEquals(toFind.get(i).value, avl.searchNode(toFind.get(i).key));
         }
+    }
+
+    @Test
+    public void insertDublicates(){
+        int[] toBeInserted =   {20,4,20,3,9,30,4,3,9,11};
+        int[] expectedHeight = {1 ,2,2 ,2,3,3 ,3,3,3,3};
+        AVLDictionary<Integer> avl = new AVLDictionary<>();
+        for (int i=0;i < toBeInserted.length;i++) {
+            avl.insert(toBeInserted[i]);
+            Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());
+        }
+    }
+
+
+    @Test
+    public void deleteNonExistent(){
+        int[] toBeInserted =   {20,4,26,3,9,30,21,2,7,11};
+        int[] expectedHeight = {1 ,2,2 ,3,3,3 ,3 ,4,4,4};
+        AVLDictionary<Integer> avl = new AVLDictionary<>();
+        for (int i=0;i < toBeInserted.length;i++) {
+            avl.insert(toBeInserted[i]);
+            Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());
+        }
+
+        int nums[] = {100, 50, 500};
+        for (int i=0;i < nums.length;i++) {
+            avl.delete(nums[i]);
+            Assertions.assertEquals(4, avl.TreeHeight());
+        }
+
+
     }
 }

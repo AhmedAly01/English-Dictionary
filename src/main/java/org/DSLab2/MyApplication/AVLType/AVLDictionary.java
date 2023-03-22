@@ -1,5 +1,6 @@
 package org.DSLab2.MyApplication.AVLType;
 
+
 public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T>{
     AVLNode<T> root;//the root node
     int size = 0;//the size of the tree(number of nodes)
@@ -191,9 +192,10 @@ public class AVLDictionary<T extends Comparable<T>> implements AVLDictionaryIF<T
             } else if (AVLNode.left == null) {//if the node has only one right child then replace the node with its child
                 AVLNode = AVLNode.right;
             } else {
-                AVLNode<T> temp = FindMin(AVLNode.right);//if the node has two children then find the minimum node in the right subtree
-                AVLNode.data = temp.data;//replace the node data with the minimum node data
-                AVLNode.right = delete(AVLNode.right, temp.data);//delete the minimum node
+                AVLNode<T> temp = FindMin(AVLNode.right);// if the node has two children then find the minimum node in the right
+                // subtree
+                AVLNode.data = temp.data;// replace the node data with the minimum node data
+                AVLNode.right = delete(AVLNode.right, temp.data);// delete the minimum node
             }
             AVLNode.height = Math.max(height(AVLNode.left), height(AVLNode.right)) + 1;//update the height of the node
             AVLNode.balanceFactor = balanceFactor(AVLNode);//update the balance factor of the node

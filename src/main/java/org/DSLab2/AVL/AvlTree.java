@@ -1,3 +1,5 @@
+package org.DSLab2.AVL;
+
 interface AvlTree {
     public int size();
 
