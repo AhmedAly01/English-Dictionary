@@ -1,7 +1,5 @@
 package org.DSLab2;
 
-
-
 import org.DSLab2.AVL.AVL_Tree;
 import org.DSLab2.MyApplication.AVLType.AVLDictionary;
 import org.DSLab2.MyApplication.AVLType.AVLNode;
@@ -252,7 +250,7 @@ public class AVLTest {
     public void testHeightInConsecutiveInsertsAndDeletes() { //root's right child isn't null
         int[] toBeInserted =   {20,4,26,3,9,30,21,2,7,11};
         int[] expectedHeight = {1 ,2,2 ,3,3,3 ,3 ,4,4,4};
-        AVL_Tree avl = new AVL_Tree();
+        AVLDictionary<Integer> avl = new AVLDictionary<>();
         for (int i=0;i < toBeInserted.length;i++) {
             avl.insert(toBeInserted[i]);
             Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());

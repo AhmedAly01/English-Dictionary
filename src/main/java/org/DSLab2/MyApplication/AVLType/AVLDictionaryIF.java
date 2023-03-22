@@ -31,8 +31,6 @@ public interface AVLDictionaryIF<T> {
 
     public boolean delete(T data);
 
-    public AVLNode<T> delete(AVLNode<T> AVLNode, T data);
-
     public void inorder();
 
 
