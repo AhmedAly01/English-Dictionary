@@ -256,6 +256,8 @@ public class AVLTest {
             avl.insert(toBeInserted[i]);
             Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());
         }
+
+
         int[] nums =              {15   , 8     , 20    , 9     ,  11   , 1     , 0};
         expectedHeight = new int[]{4    , 4     , 4     , 4     ,  4    , 4     , 4};
         boolean[] operation =     {true , true  , false , false ,false  , true  , true};//true:insert false:delete
@@ -265,6 +267,7 @@ public class AVLTest {
                 avl.insert(nums[i]);
             else
                 avl.delete(nums[i]);
+
             avl.inorder();
             Assertions.assertEquals(expectedHeight[i], avl.TreeHeight());
         }
